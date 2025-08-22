@@ -64,7 +64,6 @@
             <div class="text-center mb-6 md:mb-8">
                 <h1 class="text-2xl md:text-3xl font-bold text-primary mb-2">💰 Keuangan Pribadi</h1>
                 <p class="text-gray-600 text-sm md:text-base">Masuk ke akun Anda</p>
-
             </div>
             
             <form onsubmit="login(event)" class="space-y-4 md:space-y-6">
@@ -449,20 +448,7 @@
             document.getElementById('weekPicker').addEventListener('change', updateWeeklyReport);
             document.getElementById('monthPicker').addEventListener('change', updateMonthlyReport);
             
-            // Load initial data from Google Sheets
-            console.log('Loading data from Google Sheets...');
-            const loaded = await loadTransactions();
-            
-            if (loaded) {
-                updateDashboard();
-                displayTransactions();
-                updateWeeklyReport();
-                updateMonthlyReport();
-                updateSettingsStats();
-                console.log('App initialized successfully with Google Sheets!');
-            } else {
-                console.log('App initialized with errors - check Google Sheets connection');
-            }
+            console.log('App initialized successfully!');
         });
 
         // Mobile menu toggle
@@ -471,11 +457,13 @@
             mobileMenu.classList.toggle('hidden');
         }
 
-        // Login function
-        function login(event) {
+        // Login function - FIXED
+        async function login(event) {
             event.preventDefault();
             const username = document.getElementById('username').value;
             const password = document.getElementById('password').value;
+            
+            console.log('Login attempt:', username, password);
             
             // Simple authentication for personal use
             if (username === 'alif_adithia' && password === 'Ali1f_Ad1th1a') {
@@ -490,7 +478,7 @@
                 
                 console.log('Login successful!');
             } else {
-                alert('Username atau password salah!');
+                alert('Username atau password salah!\n\nUsername: alif_adithia\nPassword: Ali1f_Ad1th1a');
             }
         }
 
@@ -632,7 +620,7 @@
             const recentTransactions = transactions.slice(-5).reverse();
             
             if (recentTransactions.length === 0) {
-                recentContainer.innerHTML = '<p class="text-gray-500 text-center py-4 text-sm md:text-base">Memuat data dari Google Sheets...</p>';
+                recentContainer.innerHTML = '<p class="text-gray-500 text-center py-4 text-sm md:text-base">Belum ada transaksi</p>';
                 return;
             }
             
@@ -657,8 +645,8 @@
             const cardsContainer = document.getElementById('transactionCards');
             
             if (transactions.length === 0) {
-                tbody.innerHTML = '<tr><td colspan="5" class="px-4 py-8 text-center text-gray-500">Memuat data dari Google Sheets...</td></tr>';
-                cardsContainer.innerHTML = '<div class="text-center text-gray-500 py-8 text-sm">Memuat data dari Google Sheets...</div>';
+                tbody.innerHTML = '<tr><td colspan="5" class="px-4 py-8 text-center text-gray-500">Belum ada transaksi</td></tr>';
+                cardsContainer.innerHTML = '<div class="text-center text-gray-500 py-8 text-sm">Belum ada transaksi</div>';
                 return;
             }
             
@@ -1102,5 +1090,5 @@
             }
         }
     </script>
-<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'97307a83119c4a1d',t:'MTc1NTg0NTg3NC4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'97308cc582846bc3',t:'MTc1NTg0NjYyMS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
